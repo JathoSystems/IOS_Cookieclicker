@@ -8,20 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var timesClicked: Int = 0
     var body: some View {
-        VStack {
-            Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+        NavigationView() {
+            VStack {
+                Button (
+                    action: {
+                        print("Clicked the cookie")
+                        timesClicked += 1
+                    },
+                    label: {
+                        Image("Cookie")
+                            .resizable(resizingMode: .stretch)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                )
+                Text("You clicked the cookie \(timesClicked) times")
+                NavigationLink(destination: CreditView()) {
+                    Text("Credits")
+                }
+                NavigationLink(destination: StoreView()) {
+                    Text("Store")
+                }
+                .padding()
             }
-            .padding(3.0)
-            Image("Cookie")
-                .resizable(resizingMode: .stretch)
-                .aspectRatio(contentMode: .fit)
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, Thomas!")
+            .padding()
+            .navigationBarTitle("Cookie Clicker")
         }
-        .padding()
+        .navigationTitle(Text("Cookie Clicker"))
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
