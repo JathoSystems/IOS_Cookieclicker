@@ -46,11 +46,11 @@ struct StoreView: View {
                 Text("Earn 1 cookie per second")
                     .font(.caption)
                 Button(
-                    "Buy for \(Int(100*(grandmaAmount/2))) cookies",
+                    "Buy for \((50*grandmaAmount)+100) cookies",
                     action: {
-                        let grandmaPrice: Double = 100.0 * (Double(grandmaAmount)/2.0)
-                        if timesClicked >= Int(grandmaPrice) {
-                            timesClicked -= Int(grandmaPrice)
+                        let grandmaPrice: Int = (50 * grandmaAmount) + 100
+                        if timesClicked >= grandmaPrice {
+                            timesClicked -= grandmaPrice
                             grandmaAmount += 1
                         }
                     }
@@ -64,7 +64,7 @@ struct StoreView: View {
 
 #Preview {
     StoreView(
-        timesClicked: .constant(0),
+        timesClicked: .constant(100),
         cookieMultiplier: .constant(1),
         grandmaAmount: .constant(0)
     )

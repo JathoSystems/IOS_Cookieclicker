@@ -12,12 +12,7 @@ struct ContentView: View {
     @State var cookieMultiplier: Double = 1
     @State var grandmaAmount: Int = 0
     @State var isShowingSheet: Bool = false
-    func GrandmaLoop() -> Void {
-        while true {
-            timesClicked += grandmaAmount
-            Thread.sleep(forTimeInterval: 1)
-        }
-    }
+    let grandmaTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         NavigationView() {
             VStack {
@@ -64,6 +59,9 @@ struct ContentView: View {
         }
         .navigationTitle(Text("Cookie Clicker"))
         .navigationViewStyle(StackNavigationViewStyle())
+        .onReceive(grandmaTimer) { _ in
+            timesClicked += grandmaAmount
+        }
     }
 }
 
